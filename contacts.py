@@ -25,8 +25,7 @@ class Contacts:
 
     @label_lenght.setter
     def label_lenght(self, value):
-        if True:
-            self._label_lenght = len(self.first_name) + len(self.surname) + 1
+        self._label_lenght = len(self.first_name) + len(self.surname) + 1
 
 
 class BaseContact(Contacts):
@@ -124,8 +123,8 @@ if __name__ == "__main__":
     print("Wizytówki posortowane po nazwisku:", by_surname)
     print("Wizytówki posortowane po e-mail:", by_email)
 
-    # karta.label_lenght = 5
     print(karta.label_lenght)
+    print(create_contacts(BaseContact, 5)[4].label_lenght)
 
     karty[3].contact()
     create_contacts(BusinessContact, 5)[2].contact()
