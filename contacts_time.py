@@ -99,11 +99,57 @@ def create_contacts(kind, how_many):
         exit(1)
 
 
-tstart = datetime.now()
-print(tstart)
+def create_base_1000():
+    r = create_contacts(BaseContact, 1000)
+    return r
 
-create_contacts(BaseContact, 10000)
 
-tend = datetime.now()
-print(tend)
-print(tend - tstart)
+def time_check(func):
+    def time_start():
+        tstart = datetime.now()
+
+        func()
+
+        tend = datetime.now()
+        print(tend - tstart)
+
+    return time_start
+
+
+"""
+@time_check
+def create_contacts(kind, how_many):
+    card_list = []
+    if kind == BaseContact:
+        for i in range(0, how_many):
+            card_list.append(card_list)
+            card_list[i] = BaseContact(
+                first_name=fake.first_name(),
+                surname=fake.last_name(),
+                address=fake.address(),
+                email=fake.email(),
+                home_phone=fake.phone_number(),
+            )
+        return card_list
+    elif kind == BusinessContact:
+        for i in range(0, how_many):
+            card_list.append(card_list)
+            card_list[i] = BusinessContact(
+                first_name=fake.first_name(),
+                surname=fake.last_name(),
+                address=fake.address(),
+                email=fake.email(),
+                work_phone=fake.phone_number(),
+                company=fake.company(),
+                job=fake.job(),
+            )
+            card_list[i].label_lenght = 0
+        return card_list
+    else:
+        exit(1)
+"""
+create_base_1000 = time_check(create_base_1000)
+create_base_1000()
+# print(create_base_1000())
+# print(create_contacts(BaseContact, 1000))
+# print(time_check(create_contacts(BaseContact, 1000)))
