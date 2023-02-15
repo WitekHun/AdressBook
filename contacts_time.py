@@ -105,20 +105,22 @@ def create_base_1000():
 
 
 def time_check(func):
-    def time_start():
+    def time_start(kind, how_many):
         tstart = datetime.now()
 
-        func()
+        func(kind, how_many)
 
         tend = datetime.now()
-        print(tend - tstart)
+        print(
+            "Czas na wygenerowanie %d kontaktów %s wynosi %s"
+            % (how_many, kind, tend - tstart)
+        )
 
     return time_start
 
 
-"""
 @time_check
-def create_contacts(kind, how_many):
+def create_contacts_time(kind, how_many):
     card_list = []
     if kind == BaseContact:
         for i in range(0, how_many):
@@ -147,9 +149,18 @@ def create_contacts(kind, how_many):
         return card_list
     else:
         exit(1)
+
+
 """
 create_base_1000 = time_check(create_base_1000)
 create_base_1000()
 # print(create_base_1000())
 # print(create_contacts(BaseContact, 1000))
 # print(time_check(create_contacts(BaseContact, 1000)))
+"""
+
+for i in create_contacts(BusinessContact, 5):
+    i.contact()
+
+create_contacts_time(BaseContact, 1000)
+create_contacts_time(BusinessContact, 1000)
