@@ -11,7 +11,7 @@ class Contacts:
         self.email = email
 
         # veriables
-        self.label_lenght = 0
+        self.label_lenght = len(first_name) + len(surname) + 1
 
     def __repr__(self):
         return f"{self}"
@@ -19,6 +19,8 @@ class Contacts:
     def __str__(self):
         return f"({self.first_name} {self.surname}, {self.email})"
 
+
+"""
     @property
     def label_lenght(self):
         return self._label_lenght
@@ -26,6 +28,7 @@ class Contacts:
     @label_lenght.setter
     def label_lenght(self, value):
         self._label_lenght = len(self.first_name) + len(self.surname) + 1
+"""
 
 
 class BaseContact(Contacts):
@@ -70,14 +73,16 @@ def create_contacts(kind, how_many):
     card_list = []
     if kind == BaseContact:
         for i in range(0, how_many):
-            card_list.append(card_list)
-            card_list[i] = BaseContact(
+            # card_list.append(card)
+            card = BaseContact(
                 first_name=fake.first_name(),
                 surname=fake.last_name(),
                 address=fake.address(),
                 email=fake.email(),
                 home_phone=fake.phone_number(),
             )
+            card_list.append(card)
+
         return card_list
     elif kind == BusinessContact:
         for i in range(0, how_many):
@@ -91,7 +96,6 @@ def create_contacts(kind, how_many):
                 company=fake.company(),
                 job=fake.job(),
             )
-            card_list[i].label_lenght = 0
         return card_list
     else:
         exit(1)
@@ -108,6 +112,7 @@ if __name__ == "__main__":
 
     print(karta)
     print(karta.label_lenght)
+
     karty = create_contacts(BaseContact, 5)
     for i in karty:
         print(i)
@@ -129,3 +134,8 @@ if __name__ == "__main__":
     karty[3].contact()
     create_contacts(BusinessContact, 5)[2].contact()
     create_contacts(BaseContact, 5)[1].contact()
+    print(type(create_contacts(BaseContact, 5)[1]))
+    print(type(karta))
+    print(create_contacts(BaseContact, 3))
+    print(create_contacts(BusinessContact, 3))
+    print(create_contacts(BaseContact, 3)[2].label_lenght)
