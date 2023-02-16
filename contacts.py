@@ -82,12 +82,10 @@ def create_contacts(kind, how_many):
                 home_phone=fake.phone_number(),
             )
             card_list.append(card)
-
         return card_list
     elif kind == BusinessContact:
         for i in range(0, how_many):
-            card_list.append(card_list)
-            card_list[i] = BusinessContact(
+            card = BusinessContact(
                 first_name=fake.first_name(),
                 surname=fake.last_name(),
                 address=fake.address(),
@@ -96,6 +94,7 @@ def create_contacts(kind, how_many):
                 company=fake.company(),
                 job=fake.job(),
             )
+            card_list.append(card)
         return card_list
     else:
         exit(1)
@@ -135,6 +134,7 @@ if __name__ == "__main__":
     create_contacts(BusinessContact, 5)[2].contact()
     create_contacts(BaseContact, 5)[1].contact()
     print(type(create_contacts(BaseContact, 5)[1]))
+    print(type(create_contacts(BaseContact, 5)))
     print(type(karta))
     print(create_contacts(BaseContact, 3))
     print(create_contacts(BusinessContact, 3))
