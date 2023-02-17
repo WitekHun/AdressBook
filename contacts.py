@@ -11,7 +11,6 @@ class Contacts:
         self.email = email
 
         # veriables
-        self.label_lenght = len(first_name) + len(surname) + 1
 
     def __repr__(self):
         return f"{self}"
@@ -19,12 +18,12 @@ class Contacts:
     def __str__(self):
         return f"({self.first_name} {self.surname}, {self.email})"
 
-
-"""
     @property
     def label_lenght(self):
-        return self._label_lenght
+        return len(self.first_name) + len(self.surname) + 1
 
+
+"""
     @label_lenght.setter
     def label_lenght(self, value):
         self._label_lenght = len(self.first_name) + len(self.surname) + 1
@@ -139,3 +138,6 @@ if __name__ == "__main__":
     print(create_contacts(BaseContact, 3))
     print(create_contacts(BusinessContact, 3))
     print(create_contacts(BaseContact, 3)[2].label_lenght)
+    test_base = create_contacts(BaseContact, 3)[1]
+    # test_base.label_lenght = 2
+    print(test_base.label_lenght)
