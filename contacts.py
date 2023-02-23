@@ -4,13 +4,12 @@ fake = Faker("pl_PL")
 
 
 class Contacts:
-    def __init__(self, first_name, surname, address, email, _label_lenght=0):
+    def __init__(self, first_name, surname, address, email):
         self.first_name = first_name
         self.surname = surname
         self.address = address
         self.email = email
-
-        # veriables
+        self._label_lenght = len(self.first_name) + len(self.surname) + 1
 
     def __repr__(self):
         return f"{self}"
@@ -19,8 +18,8 @@ class Contacts:
         return f"({self.first_name} {self.surname}, {self.email})"
 
     @property
-    def _label_lenght(self):
-        return len(self.first_name) + len(self.surname) + 1
+    def label_lenght(self):
+        return self._label_lenght
 
 
 """
@@ -72,7 +71,6 @@ def create_contacts(kind, how_many):
     card_list = []
     if kind == BaseContact:
         for i in range(0, how_many):
-            # card_list.append(card)
             card = BaseContact(
                 first_name=fake.first_name(),
                 surname=fake.last_name(),
@@ -109,14 +107,14 @@ if __name__ == "__main__":
     )
 
     print(karta)
-    print(karta._label_lenght)
+    print(karta.label_lenght)
 
     karty = create_contacts(BaseContact, 5)
     for i in karty:
         print(i)
 
     print(karty)
-    print("Długość nagłówka %s : %d" % (karty[1], karty[1]._label_lenght))
+    print("Długość nagłówka %s : %d" % (karty[1], karty[1].label_lenght))
 
     # SORTOWANIE
     by_first_name = sorted(karty, key=lambda card: card.first_name)
@@ -126,8 +124,8 @@ if __name__ == "__main__":
     print("Wizytówki posortowane po nazwisku:", by_surname)
     print("Wizytówki posortowane po e-mail:", by_email)
 
-    print(karta._label_lenght)
-    print(create_contacts(BaseContact, 5)[4]._label_lenght)
+    print(karta.label_lenght)
+    print(create_contacts(BaseContact, 5)[4].label_lenght)
 
     karty[3].contact()
     create_contacts(BusinessContact, 5)[2].contact()
@@ -137,7 +135,7 @@ if __name__ == "__main__":
     print(type(karta))
     print(create_contacts(BaseContact, 3))
     print(create_contacts(BusinessContact, 3))
-    print(create_contacts(BaseContact, 3)[2]._label_lenght)
+    print(create_contacts(BaseContact, 3)[2].label_lenght)
     test_base = create_contacts(BaseContact, 3)[1]
-    # test_base._label_lenght = 2
-    print(test_base._label_lenght)
+    # test_base.label_lenght = 1
+    print(test_base.label_lenght)
